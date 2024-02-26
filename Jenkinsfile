@@ -5,7 +5,9 @@ node{
     stage('Prepare Environment'){
         echo 'Initialize Environment'
         tag="3.0"
-	withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
+	mavenHome = tool name: 'mavenHome' , type: 'maven'
+        mavenCMD = "${mavenHome}/bin/mvn"
+	withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
 		dockerHubUser="$dockerUser"
         }
 	containerName="bankingapp"
@@ -23,7 +25,7 @@ node{
     }
     
     stage('Maven Build'){
-        sh "mvn clean package"        
+        sh "${mavenCMD} clean package"        
     }
     
     stage('Docker Image Build'){
@@ -33,7 +35,7 @@ node{
 	
     stage('Publishing Image to DockerHub'){
         echo 'Pushing the docker image to DockerHub'
-        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
+        withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
 		sh "docker login -u $dockerUser -p $dockerPassword"
 		sh "docker push $dockerUser/$containerName:$tag"
 		echo "Image push complete"

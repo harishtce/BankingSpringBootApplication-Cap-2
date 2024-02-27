@@ -40,7 +40,14 @@ node{
 		sh "docker push $dockerUser/$containerName:$tag"
 		echo "Image push complete"
         } 
-    }    
+    }
+
+     stage('Deleting the containers in local'){
+        echo 'Deleting the containers in local'
+        sh "docker stop $containerName"
+	sh "docker container rm $containerName"
+	echo "Deletion of Containers is complete" 
+    }
 	
 	stage('Ansible Playbook Execution'){
 		sh "ansible-playbook -i inventory.yaml kubernetesDeploy.yaml -e httpPort=$httpPort -e containerName=$containerName -e dockerImageTag=$dockerHubUser/$containerName:$tag"

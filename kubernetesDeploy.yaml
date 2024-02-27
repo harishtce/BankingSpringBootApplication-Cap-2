@@ -1,5 +1,6 @@
 - name : Deploy Pods on Docker Container
   hosts : 127.0.0.1
+  become: true
   become_user: root
   connection: local
   tasks : 

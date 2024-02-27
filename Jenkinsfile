@@ -44,7 +44,8 @@ node{
 
      stage('Deleting the containers in local'){
         echo 'Deleting the containers in local'
-        sh "docker image rm $dockerHubUser/$containerName"
+        sh "docker image rm $dockerHubUser/$containerName:$tag"
+	sh "docker image prune -f"
 	echo "Deletion of Containers is complete" 
     }
 	

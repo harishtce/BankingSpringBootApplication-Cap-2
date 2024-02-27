@@ -1,7 +1,7 @@
 - name : Deploy Pods on Docker Container
   hosts : localhost
   user: lakshmimmphasis
-  connection: local
+  connection: ssh
   tasks : 
   - name: Get Container List - Before Deployment
     command: kubectl get pods -o wide

@@ -1,7 +1,8 @@
+---
 - name : Deploy Pods on Docker Container
   hosts : kubernetes
-  user: lakshmimmphasis
-  connection: ssh
+  user: root
+  become: true
   tasks : 
   - name: Get Container List - Before Deployment
     command: kubectl get pods -o wide

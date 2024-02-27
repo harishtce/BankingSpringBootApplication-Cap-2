@@ -1,5 +1,5 @@
 - name : Deploy Pods on Docker Container
-  hosts : kubernetes
+  hosts : 127.0.0.1
   become_user: root
   connection: local
   tasks : 

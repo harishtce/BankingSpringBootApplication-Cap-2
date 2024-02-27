@@ -44,8 +44,8 @@ node{
 
      stage('Deleting the containers in local'){
         echo 'Deleting the containers in local'
-        sh "docker stop $containerName"
-	sh "docker container rm $containerName"
+        sh "docker stop $dockerHubUser/$containerName"
+	sh "docker container rm $dockerHubUser/$containerName"
 	echo "Deletion of Containers is complete" 
     }
 	

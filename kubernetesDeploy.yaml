@@ -1,7 +1,6 @@
 - name : Deploy Pods on Docker Container
-  hosts : 127.0.0.1
+  hosts : localhost
   user: lakshmimmphasis
-  become: true
   connection: local
   tasks : 
   - name: Get Container List - Before Deployment
